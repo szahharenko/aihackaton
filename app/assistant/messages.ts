@@ -14,9 +14,20 @@ export const thinkingMessage: Message = {
     createdAt: new Date(),
 }
 
+const books = [
+    'Бедные люди',
+    'Униженные и оскорблённые',
+    'Преступление и наказание',
+    'Игрок',
+    'Идиот',
+    'Бесы',
+    'Подросток',
+    'Братья Карамазовы'
+];
+
 export const greetingMessage : Message = {
     id: "greeting",
     role: "assistant",
-    content: "Hei, i'm your Forsta studio assistant. How can I help you?",
+    content: `Привет, я Фёдор! Обсудим книги? Может ${ books[Math.floor(Math.random() * books.length)] }?`,
     createdAt: new Date(),
 };
