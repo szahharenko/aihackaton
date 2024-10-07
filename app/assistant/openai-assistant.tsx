@@ -2,9 +2,8 @@
 
 import { AssistantStream } from 'openai/lib/AssistantStream';
 import { useState, useRef } from "react";
-import { AiOutlineUser, AiOutlineRobot, AiOutlineSend } from "react-icons/ai";
-import Markdown from 'react-markdown';
 import { Message, Role, greetingMessage, thinkingMessage } from './messages';
+import { OpenAIAssistantMessage } from './message';
 
 export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
     const [isLoading, setIsLoading] = useState(false);
@@ -80,11 +79,7 @@ export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
                     message={m}
                 />
             )}
-            {isLoading &&
-                <OpenAIAssistantMessage
-                    message={streamingMessage}
-                />
-            }
+            {isLoading && <OpenAIAssistantMessage message={streamingMessage} /> }
             <form onSubmit={handleSubmit} className="flex">
                 <input
                     disabled={isLoading}
@@ -95,26 +90,11 @@ export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
                 {isLoading ?
                     <button disabled>💬</button>
                     :
-                    <button disabled={prompt.length == 0}>
-                        <AiOutlineSend />
-                    </button>
+                    <button disabled={prompt.length == 0}>➤</button>
                 }
             </form>
         </div>
     )
 }
 
-export function OpenAIAssistantMessage({message}: {message:Message}) {
-    return (
-        <div className="flex">
-            <div className="role">
-                {message.role === "user" ? <AiOutlineUser /> : <AiOutlineRobot />}
-            </div>
-            <div className="message">
-                <Markdown>
-                    {message.content}
-                </Markdown>
-            </div>
-        </div>
-    )
-}
+
