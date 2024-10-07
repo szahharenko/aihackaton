@@ -6,14 +6,14 @@ import { AiOutlineUser, AiOutlineRobot, AiOutlineSend } from "react-icons/ai";
 import Markdown from 'react-markdown';
 import { Message, Role, greetingMessage, thinkingMessage } from './messages';
 
-export default function OpenAIAssistant({assistantId = ""}: {assistantId: string}) {
+export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
     const [isLoading, setIsLoading] = useState(false);
     const [threadId, setThreadId] = useState<string|null>(null);
     const [prompt, setPrompt] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const [streamingMessage, setStreamingMessage] = useState<Message>(thinkingMessage);
     const messageId = useRef(0);
-    const addMessage = ({content, role, } : {content: string, role: Role}) => {
+    const addMessage = ({content, role} : {content: string, role: Role}) => {
         messageId.current ++;
         setMessages((prevMessages) => {
             return[
