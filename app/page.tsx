@@ -1,6 +1,10 @@
 import OpenAIAssistant from "./assistant/openai-assistant";
 
+const assistantId = process.env.OPENAI_ASSISTANT_ID;
+
 export default function Home() {
-  return <OpenAIAssistant assistantId="asst_1sgML9u8POWaairGf25LEeFn" />
-  ;
+  if(!assistantId) {
+    return <div>Assistant ID not found. Please add variable <strong>OPENAI_ASSISTANT_ID</strong></div>
+  }
+  return <OpenAIAssistant assistantId={assistantId} />;
 }
