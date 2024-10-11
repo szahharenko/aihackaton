@@ -1,1 +1,1 @@
-## Fedor Dostojevski
+# OpenAI assistant intergration
