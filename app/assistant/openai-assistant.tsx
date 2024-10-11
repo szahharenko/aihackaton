@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { Message, Role, greetingMessage, thinkingMessage } from './messages';
 import { OpenAIAssistantMessage } from './message';
 
-export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
+export default function OpenAIAssistant({assistantId, welcomeMessage}: {assistantId: string, welcomeMessage: string | undefined}) {
     const [isLoading, setIsLoading] = useState(false);
     const [threadId, setThreadId] = useState<string|null>(null);
     const [prompt, setPrompt] = useState("");
@@ -72,7 +72,7 @@ export default function OpenAIAssistant({assistantId}: {assistantId: string}) {
 
     return (
         <div className="flex flex-col relative">
-            <OpenAIAssistantMessage message={greetingMessage} />
+            <OpenAIAssistantMessage message={welcomeMessage !== undefined ? {...greetingMessage, content: welcomeMessage} : greetingMessage} />
             {messages.map(m =>
                 <OpenAIAssistantMessage
                     key={m.id}
